@@ -2,9 +2,19 @@ package kosta.model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Board implements Serializable{
 	private int seq;
+	
+	@Pattern(regexp="[0-9a-zA-Z°¡-ÆR]*", message="Æ¯¼ö¹®ÀÚ ÀÔ·Â ±İÁö")
 	private String writer;
+	
+	@NotEmpty(message="Á¦¸ñÀ» ²À ÀÔ·ÂÇÏ¼¼¿ä")
+	@Size(min=2, max=5, message="2ÀÚ ÀÌ»ó 5ÀÚ ÀÌÇÏ·Î ÀÔ·Â")
 	private String title;
 	private String contents;
 	private String regdate;

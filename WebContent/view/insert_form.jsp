@@ -17,15 +17,16 @@
 <body>
 <h3>${title }</h3>
 <hr>
-<form action="board_insert.do" method="post" <%-- commandName="boardCommand" --%>>
-	작성자 : <input type="text" name="writer"/><br>
-	제목 : <input type="text" name="title"/><br>	
-			<!-- <errors path="title" cssClass="error"/>	 -->
+<form:form action="board_insert" method="post" commandName="boardCommand">
+	작성자 : <form:input type="text" path="writer"/><br>
+			<form:errors path="writer" cssClass="error"/><br>
+	제목 : <form:input type="text" path="title"/><br>	
+			<form:errors path="title" cssClass="error"/><br>
 	내용 <br>
-	<textarea rows="6" cols="70" name></textarea>
+	<form:textarea rows="6" cols="70" path="contents"></form:textarea>
 	<br>
 	<input type="submit" value="등록">
-</form>
+</form:form>
 
 </body>
 </html>

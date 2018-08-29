@@ -26,18 +26,19 @@ public class BoardController {
 	Board board;
 	
 	@RequestMapping(value = "/board_insert", method=RequestMethod.GET) //시작시에 BoardCommand 객체를 요구한다.
-	public String insertForm(/*@ModelAttribute("boardCommand") @Valid Board board, */Model model) {
+	public String insertForm(@ModelAttribute("boardCommand") Board board, Model model) {
+		
 		model.addAttribute("title", "글쓰기폼");
 		return "insert_form";
 	}
 
 	@RequestMapping(value = "/board_insert", method=RequestMethod.POST)
-	public String board_insert(/*@ModelAttribute("boardCommand") @Valid */Board board/*, BindingResult errors*/) { 
+	public String board_insert(@ModelAttribute("boardCommand") @Valid Board board, BindingResult errors) { 
 
-		/*if(errors.hasErrors()) {
+		if(errors.hasErrors()) {
 			System.out.println("error 발생");
 			return "insert_form";
-		}*/
+		}
 		
 		return "redirect:board_list";
 	}
