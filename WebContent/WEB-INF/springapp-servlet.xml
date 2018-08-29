@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+	<!-- <bean id="helloController" class="kosta.controller.HelloController"> 
+		<property name="service" ref="helloService"/> </bean> <bean id="helloService" 
+		class="kosta.service.HelloService"></bean> 스프링컨테이너에 넣기 -->
+
+	<context:annotation-config />
+	<context:component-scan base-package="kosta"/>
+
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler /> <!-- index.html 을 톰켓에서 실행 하도록하게함 ( .do 다뺴고 / 넣엇을떄 404 애러뜨는데 , -->
+
+
+
+	<bean id="helloService" class="kosta.service.HelloService"></bean>
+
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> <!-- 뷰 리절브 선언 -->
+		<property name="prefix" value="/view/" />   <!-- view폴더 안에 -->
+		<property name="suffix" value=".jsp" />   <!-- .jsp 확장자명 -->
+	</bean>
+
+</beans>
