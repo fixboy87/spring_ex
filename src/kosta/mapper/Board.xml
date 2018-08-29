@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<select id="listBoard" resultType="Board">
-		select * from board
+		select * from board order by seq
 	</select>
 	
 <!-- 	<select id="listBoard" resultType="Board" parameterType="Search">
@@ -46,6 +46,9 @@
 			where seq = #{seq}
 	</update>
 
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where seq = #{seq}
+	</delete>
 	
 </mapper>
 

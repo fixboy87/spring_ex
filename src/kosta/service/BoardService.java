@@ -29,4 +29,12 @@ public class BoardService {
 	public Board getBoardService(int seq) {
 		return dao.getBoard(seq);
 	}
+
+	public void deleteBoardService(int seq) {
+		dao.deleteBoard(seq);
+	}
+
+	public void updateBoardService(Board board) {
+		dao.updateBoard(board);
+	}
 }

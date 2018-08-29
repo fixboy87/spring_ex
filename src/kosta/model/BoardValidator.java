@@ -19,7 +19,7 @@ public class BoardValidator implements Validator {
 		Board board = (Board)arg0;
 		
 		if(board.getTitle() == null || board.getTitle().length() == 0){
-			errors.rejectValue("title", "require", "Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+			errors.rejectValue("title", "require", "ê°’ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”!!!");
 		}
 	}
 

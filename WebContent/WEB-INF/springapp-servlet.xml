@@ -13,43 +13,63 @@
 		class="kosta.service.HelloService"></bean> 스프링컨테이너에 넣기 -->
 
 	<context:annotation-config />
-	<context:component-scan base-package="kosta"/>
+	<context:component-scan base-package="kosta" />
 
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler /> <!-- index.html 을 톰켓에서 실행 하도록하게함 ( .do 다뺴고 / 넣엇을떄 404 애러뜨는데 , -->
 
 
 
-	<bean id="helloService" class="kosta.service.HelloService"></bean>
+	<!-- <bean id="helloService" class="kosta.service.HelloService"></bean> -->
+
+
+
+
+
+	<!-- Tiles Setting -->
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles2def.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="viewResolver2"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+		<property name="order" value="1" /><!-- 뷰리절브 두개라서 우선순위 정해줘야함 숫자 
+			낮은게 우선순위 큼 -->
+	</bean>
 
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> <!-- 뷰 리절브 선언 -->
 		<property name="prefix" value="/view/" />   <!-- view폴더 안에 -->
 		<property name="suffix" value=".jsp" />   <!-- .jsp 확장자명 -->
+		<property name="order" value="2" />
 	</bean>
-
 
 
 
 	<!-- DB(Mybatis) Setting -->
-	
-	<bean id="sqlSessionTemplate"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="/WEB-INF/mybatis-config.xml"/>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/mybatis-config.xml" />
 	</bean>
-	
-	<bean id="dataSource"
-		class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="jdbc/oracle"/>
-		<property name="resourceRef" value="true"/>
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/oracle" />
+		<property name="resourceRef" value="true" />
 	</bean>
-	
-	
+
+
 </beans>

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,10 +27,10 @@ public class BoardController {
 	List<Board> list;
 	Board board;
 	
-	@RequestMapping(value = "/board_insert", method=RequestMethod.GET) //Ω√¿€Ω√ø° BoardCommand ∞¥√º∏¶ ø‰±∏«—¥Ÿ.
+	@RequestMapping(value = "/board_insert", method=RequestMethod.GET) //ÔøΩÔøΩÔøΩ€Ω√øÔøΩ BoardCommand ÔøΩÔøΩ√ºÔøΩÔøΩ ÔøΩ‰±∏ÔøΩ—¥ÔøΩ.
 	public String insertForm(@ModelAttribute("boardCommand") Board board, Model model) {
 		
-		model.addAttribute("title", "±€æ≤±‚∆˚");
+		model.addAttribute("title", "Ïò§ÎäòÏùò Ï†úÎ™©");
 		return "insert_form";
 	}
 
@@ -37,7 +38,6 @@ public class BoardController {
 	public String board_insert(@ModelAttribute("boardCommand") @Valid Board board, BindingResult errors) { 
 
 		if(errors.hasErrors()) {
-			System.out.println("error πﬂª˝");
 			return "insert_form";
 		}
 		
@@ -56,15 +56,30 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping(value="/board_detail", method=RequestMethod.GET)
-	public String board_detail(@RequestParam("seq") int seq, Model model) {
+	@RequestMapping(value="/board_detail{seq}", method=RequestMethod.GET)
+	public String board_detail(@PathVariable int seq, Model model) {
 		model.addAttribute("board", service.getBoardService(seq));
 		return "detail";
 	}
 	
+	@RequestMapping(value="/board_delete{seq}", method=RequestMethod.GET)
+	public String board_delete(@PathVariable int seq, Board board) {
+		service.deleteBoardService(seq);
+		return "redirect:board_list";
+	}
 	
+	@RequestMapping(value="/board_update", method=RequestMethod.POST)
+	public String board_update(@ModelAttribute("boardCommand") @Valid Board board, BindingResult errors) {
+		
+		if(errors.hasErrors()){
+			return "board_detail";
+		}
+		
+		service.updateBoardService(board);
+		return "redirect:board_list";
+	}
 	
-	
+
 	@Autowired
 	public BoardController(BoardService service) {
 		super();

@@ -10,12 +10,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Board implements Serializable{
 	private int seq;
 	
-	@Pattern(regexp="[0-9a-zA-Z°¡-ÆR]*", message="Æ¯¼ö¹®ÀÚ ÀÔ·Â ±İÁö")
+	@Pattern(regexp="[0-9a-zA-Zê°€-í£]*", message="íŠ¹ìˆ˜ë¬¸ìëŠ” ì‚¬ìš©ì´ ë¶ˆê°€í•©ë‹ˆë‹¤!!")
 	private String writer;
 	
-	@NotEmpty(message="Á¦¸ñÀ» ²À ÀÔ·ÂÇÏ¼¼¿ä")
-	@Size(min=2, max=5, message="2ÀÚ ÀÌ»ó 5ÀÚ ÀÌÇÏ·Î ÀÔ·Â")
+	@NotEmpty(message="ì…ë ¥í•œ ê°’ì´ ì—†ìŠµë‹ˆë‹¤!!!")
+	@Size(min=2, max=5, message="2ìì—ì„œ 5ì ì‚¬ì´ì˜ ê°’ë§Œ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤!!!")
 	private String title;
+	@NotEmpty(message="ì…ë ¥í•œ ê°’ì´ ì—†ìŠµë‹ˆë‹¤!!!")
 	private String contents;
 	private String regdate;
 	private int hitcount;	
