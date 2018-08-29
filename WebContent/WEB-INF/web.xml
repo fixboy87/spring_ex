@@ -8,10 +8,6 @@
   			org.springframework.web.servlet.DispatcherServlet
 		</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>springapp</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>  
   
 	<filter>
 		<filter-name>encodingfilter</filter-name>
@@ -23,6 +19,11 @@
      	<param-value>UTF-8</param-value>
      </init-param>
   </filter>
+
+	<servlet-mapping>
+		<servlet-name>springapp</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

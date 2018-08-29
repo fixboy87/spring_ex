@@ -40,6 +40,8 @@ public class BoardController {
 			return "insert_form";
 		}
 		
+		service.insertBoardService(board);
+		
 		return "redirect:board_list";
 	}
 	

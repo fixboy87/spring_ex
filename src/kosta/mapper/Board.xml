@@ -19,19 +19,23 @@
 		<result property="title" column="title"/>
 	</resultMap>
 	
-	<select id="listBoard" resultType="Board" parameterType="Search">
+	<select id="listBoard" resultType="Board">
+		select * from board
+	</select>
+	
+<!-- 	<select id="listBoard" resultType="Board" parameterType="Search">
 		select * from board
 		<if test="area != null">
 			<where>
 				<foreach collection="area" item="item" separator="or"
 					open="(" close=")">
-					<!-- title LIKE %aa% or writer LIKE %aa% -->
+					title LIKE %aa% or writer LIKE %aa%
 					${item}	LIKE #{searchKey}
 				</foreach>
 			</where>
 		</if>
 		
-	</select>
+	</select> -->
 	
 	<select id="getBoard" parameterType="int" resultType="Board">
 		select * from board where seq = #{seq}

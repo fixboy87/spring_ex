@@ -3,19 +3,29 @@ package kosta.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kosta.model.Board;
+import kosta.model.BoardDao;
 
 @Service
 public class BoardService {
-	
+	private BoardDao dao;
+
+	@Autowired
+	public void setDao(BoardDao dao) {
+		this.dao = dao;
+	}
+
+	public void insertBoardService(Board board) {
+		dao.insertBoard(board);
+	}
+
 	public List<Board> listBoardService() {
 		List<Board> list = new ArrayList<Board>();
-		Board board = new Board(1, "Çã±Õ", "È«±æµ¿Àü", "È«±æµ¿ °¡¶ó»ç´ë", "2018-08-28", 0);
-		System.out.println(board);
 		
-		list.add(board);
+	
 		return list;
 	}
 }

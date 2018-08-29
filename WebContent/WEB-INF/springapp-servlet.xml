@@ -29,4 +29,27 @@
 		<property name="suffix" value=".jsp" />   <!-- .jsp 확장자명 -->
 	</bean>
 
+
+
+
+	<!-- DB(Mybatis) Setting -->
+	
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="/WEB-INF/mybatis-config.xml"/>
+	</bean>
+	
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/oracle"/>
+		<property name="resourceRef" value="true"/>
+	</bean>
+	
+	
 </beans>
