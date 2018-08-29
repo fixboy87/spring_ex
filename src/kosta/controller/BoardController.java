@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.model.Board;
@@ -45,7 +46,7 @@ public class BoardController {
 		return "redirect:board_list";
 	}
 	
-	@RequestMapping("/board_list")
+	@RequestMapping(value = "/board_list", method=RequestMethod.GET)
 	public String board_list(Model model) {
 		
 		list = service.listBoardService();
@@ -53,6 +54,16 @@ public class BoardController {
 		
 		return "list";
 	}
+	
+	
+	@RequestMapping(value="/board_detail", method=RequestMethod.GET)
+	public String board_detail(@RequestParam("seq") int seq, Model model) {
+		model.addAttribute("board", service.getBoardService(seq));
+		return "detail";
+	}
+	
+	
+	
 	
 	@Autowired
 	public BoardController(BoardService service) {

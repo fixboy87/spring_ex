@@ -12,7 +12,7 @@ import kosta.model.BoardDao;
 @Service
 public class BoardService {
 	private BoardDao dao;
-
+	
 	@Autowired
 	public void setDao(BoardDao dao) {
 		this.dao = dao;
@@ -23,9 +23,10 @@ public class BoardService {
 	}
 
 	public List<Board> listBoardService() {
-		List<Board> list = new ArrayList<Board>();
-		
+		return dao.listBoard();
+	}
 	
-		return list;
+	public Board getBoardService(int seq) {
+		return dao.getBoard(seq);
 	}
 }
