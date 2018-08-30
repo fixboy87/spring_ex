@@ -13,6 +13,7 @@
 			<li>번호: <input type="text" path="seq" value="${board.seq }" readonly/>
 			<li>제목: <input type="text" path="title" value="${board.title }" readonly/>
 			<li>작성자: <input type="text" path="writer" value="${board.writer }" readonly/>
+			<li>파일: <a href="board_download?filename=${board.fname}">${board.fname }</a></li>
 			<li>내용: <input type="textarea" rows="6" cols="70" path="contents" value="${board.contents }"/>
 				<%-- <br><form:errors path="contents" cssClass="error"></form:errors> --%></li>
 		</ul>

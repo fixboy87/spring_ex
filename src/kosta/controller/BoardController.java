@@ -101,6 +101,13 @@ public class BoardController {
 		return "list_json";
 	}
 	
+	@RequestMapping(value="/board_download", method=RequestMethod.GET)
+	public String board_download(@RequestParam String filename, Model model) throws Exception{
+		File file = new File(uploadDir, filename);
+		model.addAttribute("downloadFile", file);
+		
+		return "downloadView";
+	}
 	
 	@Autowired
 	public BoardController(BoardService service) {

@@ -30,9 +30,10 @@
 
 	<!-- File Upload -->
 	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 			
-	</bean>
+	<bean id="downloadView" class="kosta.view.DownloadView"/>
+
 
 
 	<!-- Transaction Setting-->
@@ -71,11 +72,18 @@
 		</property>
 	</bean>
 
+	
+	
+	<bean id="viewResolver3"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1"/>
+	</bean>
+
 	<bean id="viewResolver2"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles3.TilesView"/>
-		<property name="order" value="1" /><!-- 뷰리절브 두개라서 우선순위 정해줘야함 숫자 
+		<property name="order" value="2" /><!-- 뷰리절브 두개라서 우선순위 정해줘야함 숫자 
 			낮은게 우선순위 큼 -->
 	</bean>
 
@@ -84,7 +92,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> <!-- 뷰 리절브 선언 -->
 		<property name="prefix" value="/view/" />   <!-- view폴더 안에 -->
 		<property name="suffix" value=".jsp" />   <!-- .jsp 확장자명 -->
-		<property name="order" value="2" />
+		<property name="order" value="3" />
 	</bean>
 
 
