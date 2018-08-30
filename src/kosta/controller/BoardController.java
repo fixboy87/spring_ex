@@ -1,5 +1,6 @@
 package kosta.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.model.Board;
@@ -24,8 +26,7 @@ import kosta.service.BoardService;
 @Controller
 public class BoardController {
 	BoardService service;
-	List<Board> list;
-	Board board;
+	private String uploadDir = "C:/mjk/upload";
 	
 	@RequestMapping(value = "/board_insert", method=RequestMethod.GET) //���۽ÿ� BoardCommand ��ü�� �䱸�Ѵ�.
 	public String insertForm(@ModelAttribute("boardCommand") Board board, Model model) {
@@ -40,6 +41,22 @@ public class BoardController {
 		if(errors.hasErrors()) {
 			return "insert_form";
 		}
+		/***********************************************************/
+		MultipartFile multi = board.getUploadFile();
+		if(multi != null) {
+			//파일 이름을 추출 후에 파일이름을 저장한 것
+			String fname = multi.getOriginalFilename();
+			board.setFname(fname);
+			
+			//실질적인 파일 업로드를 진행
+			try {
+				multi.transferTo(new File(uploadDir, fname));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		}
+		/***********************************************************/
 		
 		service.insertBoardService(board);
 		
@@ -49,7 +66,7 @@ public class BoardController {
 	@RequestMapping(value = "/board_list", method=RequestMethod.GET)
 	public String board_list(Model model) {
 		
-		list = service.listBoardService();
+		List<Board> list = service.listBoardService();
 		model.addAttribute("list", list);
 		
 		return "list";

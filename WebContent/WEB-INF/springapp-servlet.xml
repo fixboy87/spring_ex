@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 
 	<!-- <bean id="helloController" class="kosta.controller.HelloController"> 
@@ -23,11 +27,36 @@
 	<!-- <bean id="helloService" class="kosta.service.HelloService"></bean> -->
 
 
+
+	<!-- File Upload -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			
+	</bean>
+
+
+	<!-- Transaction Setting-->
+	<!-- 1. 트랜잭션 매니저 : namespace에서 tx를 추가 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+
+
 	<!-- AOP Setting -->
 	<aop:aspectj-autoproxy/> <!-- 프록시의 자동 생성***** -->
 	<bean id="sessionAspect" class="kosta.aspect.SessionAspect">
 	
 	</bean>
+
+
+
+
+	
 
 
 
@@ -57,6 +86,8 @@
 		<property name="suffix" value=".jsp" />   <!-- .jsp 확장자명 -->
 		<property name="order" value="2" />
 	</bean>
+
+
 
 
 

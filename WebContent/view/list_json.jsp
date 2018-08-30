@@ -5,10 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#table {
+	border: solid, thin;
+}
+</style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 $(function() {
 	$.getJSON("board_listing_json", function(data){
+		
+	alert("AJAX 호출 전");
 		
 		$.each(data, function(index, board) {
 			$("#table").append('<tr><td>' + board.seq + '</td><td><a href=board_detail' + board.seq + '>' + board.title + '</a></td><td>' +
