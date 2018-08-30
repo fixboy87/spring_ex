@@ -29,6 +29,12 @@ public class HelloController {
 		return "hello";
 	}
 	
+	@RequestMapping("/spring_client")
+	public String spring_client() {
+		return "client";
+	}
+	
+	
 	public HelloController() {
 		// TODO Auto-generated constructor stub
 	}

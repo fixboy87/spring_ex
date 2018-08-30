@@ -23,6 +23,11 @@
 	<!-- <bean id="helloService" class="kosta.service.HelloService"></bean> -->
 
 
+	<!-- AOP Setting -->
+	<aop:aspectj-autoproxy/> <!-- 프록시의 자동 생성***** -->
+	<bean id="sessionAspect" class="kosta.aspect.SessionAspect">
+	
+	</bean>
 
 
 

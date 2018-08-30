@@ -79,7 +79,12 @@ public class BoardController {
 		return "redirect:board_list";
 	}
 	
-
+	@RequestMapping(value="/board_list_json", method=RequestMethod.GET)
+	public String board_list_json() {
+		return "list_json";
+	}
+	
+	
 	@Autowired
 	public BoardController(BoardService service) {
 		super();
